@@ -5,7 +5,7 @@ const router = express.Router()
 
 const authorController = require('../controller/authorController')
 const blogController = require('../controller/blogsController')
-const middlewere = require('../middlewere/middlewere')
+const middlewere = require('../middleware/middleware')
 
 
 

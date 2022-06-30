@@ -51,10 +51,10 @@ const createBlog = async function (req, res) {
     }
 }
 
-//fetch 
+//--------------------fetch----------------- 
 const blogDetails = async function (req, res) {
     try {
-        //const getDetails = req.query.Id
+        
         if (req.query.authorId || req.query.tags || req.query.category || req.query.subCategory) {
             let authorId = req.query.authorId
             let tags = req.query.tags
@@ -95,7 +95,9 @@ const blogDetails = async function (req, res) {
     }
 }
 
-//update
+//------------------------update-------------------------
+
+
 const blogUpdate = async function (req, res) {
     try {
 
@@ -152,31 +154,21 @@ const blogUpdate = async function (req, res) {
             obj.isPublished = isPublished
         }
         obj.isDeleted = false
-        
-        
 
-        const updating = await blogsModels.findByIdAndUpdate({ _id: blogId, isDeleted: false }, { title: title, body: body, tags: tags, subCategory: subCategory, isPublished: isPublished },{ new: true })
-      
+
+
+        const updating = await blogsModels.findByIdAndUpdate({ _id: blogId, isDeleted: false }, { title: title, body: body, tags: tags, subCategory: subCategory, isPublished: isPublished }, { new: true })
+
         if (!updating) {
             return res.status(404).send({ status: false, msg: "given data is invalid " })
         }
-       
+
 
         else {
             return res.status(201).send({ status: true, msg: "data update successfully", data: updating })
         }
-    
-    
-   
-       
 
 
-        //}
-
-
-        //v
-
-    
     }
     catch (err) {
         return res.status(404).send({ status: false, msg: err.msg })
@@ -184,7 +176,7 @@ const blogUpdate = async function (req, res) {
 }
 
 
-//delete
+//-------------------------delete----------------------------
 
 const deleted = async function (req, res) {
     try {
@@ -209,7 +201,7 @@ const deleted = async function (req, res) {
             }
 
             const remove = req.query.blogId
-           
+
             const removeData = await blogsModels.findOneAndDelete({ _id: remove })
             return res.status(201).send({ status: true, msg: "delete succesfully", removeData })
 
